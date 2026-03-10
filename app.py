@@ -7,6 +7,7 @@ import tflite_runtime.interpreter as tflite
 # =============================
 # Configuration
 # =============================
+print("Configuration ...")
 MODEL_PATH = "model.tflite"            # Chemin vers le modèle TFLite embarqué
 # SEND_URL = "http://SERVER_IP:5000/upload"  # URL serveur (désactivée pour le moment)
 CONF_THRESHOLD = 0.5                    # Seuil de confiance pour valider détection
@@ -15,6 +16,7 @@ COOLDOWN = 5                            # Délai minimum entre deux détections 
 # =============================
 # Chargement du modèle TFLite
 # =============================
+print("Chargement TFLite ...")
 interpreter = tflite.Interpreter(model_path=MODEL_PATH)
 interpreter.allocate_tensors()
 
@@ -25,6 +27,7 @@ output_details = interpreter.get_output_details()
 # =============================
 # Initialisation caméra (Raspberry)
 # =============================
+print("Initialisation de la camera ...")
 # /dev/video0 correspond généralement à une caméra USB
 # ou à une caméra CSI exposée via V4L2
 cap = cv2.VideoCapture("/dev/video0")
@@ -34,6 +37,7 @@ last_sent = 0  # Timestamp du dernier envoi
 # =============================
 # Boucle principale
 # =============================
+
 try:
     while True:
         ret, frame = cap.read()  # Capture image caméra
